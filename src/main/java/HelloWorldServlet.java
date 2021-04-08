@@ -16,6 +16,8 @@ public class HelloWorldServlet extends HttpServlet {
         hitCount = 0;
     }
 
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
