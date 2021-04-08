@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello-world")
+@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello-world")//could just have "/hello-world" in parenthesis
 public class HelloWorldServlet extends HttpServlet {
 
     private int hitCount;
@@ -17,16 +17,21 @@ public class HelloWorldServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
         res.setContentType("text/html");
-        String name = req.getParameter("name" );
+        String name = req.getParameter("name");
+        String action = req.getParameter("action");
         hitCount++;
         PrintWriter out = res.getWriter();
-        if (name != null) {
+
+        if (name != null)
             out.println("<h1>Hello, " + name + "!</h1><h2>View Count: " + hitCount + "</h2>");
-        } else {
+         else
             out.println("<h1>Hello, World!</h1></h1><h2>View Count: " + hitCount + "</h2>");
-        }
+
+        if (action.equalsIgnoreCase("reset"))
+        init();
     }
 
 
