@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello-world")//could just have "/hello-world" in parenthesis
+@WebServlet("/hello-world")
 public class HelloWorldServlet extends HttpServlet {
 
     private int hitCount;
@@ -15,8 +15,6 @@ public class HelloWorldServlet extends HttpServlet {
     public void init() {
         hitCount = 0;
     }
-
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
