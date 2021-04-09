@@ -36,6 +36,7 @@
 
 <%------------------------------------- jquery function included from jsScript.jsp --%>
 <%@ include file="partials/jsScript.jsp" %>
+
 </body>
 
 </html>
