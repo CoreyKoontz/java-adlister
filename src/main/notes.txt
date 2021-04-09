@@ -1,0 +1,23 @@
+1. GET and POST?
+Get to request info from server
+Post to send data to server
+
+2. mavan manages dependencies
+
+3. JAR (Java ARchive) - Packaged and Executable java program (artifact)
+    WAR (Web ARchive) - Packaged and Executable java program with web resources (servlets, html, etc) (artifact)
+
+4. Tomcat - servlet container.
+            Handles the low level networking details of accepting http requests
+
+5. Servlet- Java class extending HttpServlet class.
+            Handles http request and responses.
+            Allows us to make dynamic web pages
+
+6. JSP (Java Server Pages) - Allows us to create HTML pages with dynamic content
+                             by letting us mix Java code into our HTML.
+
+7. <%@ %> - Directive: Set value for file
+   <!% %> - Defines Instance Variables
+   <%= %> -
+   <% %>  -

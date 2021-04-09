@@ -7,10 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Profile Page</title>
-</head>
+
+<jsp:include page="partials/head.jsp">
+    <jsp:param name="title" value="Profile"/>
+</jsp:include>
 <body>
+<%@ include file="partials/navbar.jsp" %>
 <h1>This is your profile page!</h1>
+
+<%@ include file="partials/footer.jsp" %>
+<%@ include file="partials/scriptlinks.jsp" %>
+<%@ include file="partials/jsScript.jsp" %>
+
 </body>
 </html>

@@ -6,11 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
-<head>
-    <title>Login</title>
-</head>
+
+<jsp:include page="partials/head.jsp">
+    <jsp:param name="title" value="Log In"/>
+</jsp:include>
+
 <body>
+
+<%@ include file="partials/navbar.jsp" %>
 
 <form action="/login.jsp" method="POST" name="login">
     <label for="username">Username: </label>
@@ -21,8 +26,11 @@
     <br>
     <input type="submit">
 </form>
-
+<%@ include file="partials/footer.jsp" %>
+<%@ include file="partials/scriptlinks.jsp" %>
+<%@ include file="partials/jsScript.jsp" %>
 </body>
+
 </html>
 
 <%!
