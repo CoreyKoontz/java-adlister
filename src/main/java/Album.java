@@ -1,17 +1,17 @@
 import java.io.Serializable;
 
-public class AlbumBean implements Serializable {
+public class Album implements Serializable {
 
-    int id;
-    String artist;
-    String name;
-    int release_date;
-    String genre;
-    Double sales;
+    private int id;
+    private String artist;
+    private String name;
+    private int release_date;
+    private String genre;
+    private Double sales;
 
-    public AlbumBean() {} // Empty constructor
+    public Album() {} // Empty constructor
 
-    public AlbumBean(int id, String artist, String name, int release_date, String genre, Double sales) {
+    public Album(int id, String artist, String name, int release_date, String genre, Double sales) {
         this.id = id;
         this.artist = artist;
         this.name = name;

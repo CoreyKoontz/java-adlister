@@ -1,14 +1,14 @@
 import java.io.Serializable;
 
-public class AuthorsBean implements Serializable {
+public class Author implements Serializable {
 
-    int id;
-    String first_name;
-    String last_name;
+    private int id;
+    private String first_name;
+    private String last_name;
 
-    public AuthorsBean() {} // Empty constructor
+    public Author() {} // Empty constructor
 
-    public AuthorsBean(int id, String first_name, String last_name) {
+    public Author(int id, String first_name, String last_name) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
