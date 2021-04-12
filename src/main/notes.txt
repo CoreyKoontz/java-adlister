@@ -21,3 +21,30 @@ Post to send data to server
    <!% %> - Defines Instance Variables
    <%= %> -
    <% %>  -
+
+   MVC Introduction exercise:
+
+   1. logic for deciding if a given move has won the game
+   Controller
+   2. the total number of games won by a specific user
+   Controller
+   3. the game board
+   View
+   4. the ability to click a tile
+   ???
+   5. the name of a user
+   Model
+   6. code that defines that a user's current Tic-tac-toe game symbol (X or O) will be displayed to the right of their username
+   View
+   7. directing a user to a high score page if they want to see high scores
+   View
+
+   ------------
+   1. the menu
+   Model
+   2. the waiter
+   View
+   3. the kitchen inventory
+   Model
+   4. the chef
+   Controller
