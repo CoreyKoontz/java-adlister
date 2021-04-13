@@ -22,7 +22,6 @@ public class LoginServlet extends HttpServlet {
                 resp.sendRedirect("/profile");
             } else {
                 resp.sendRedirect("/login");
-
             }
         }
     }
