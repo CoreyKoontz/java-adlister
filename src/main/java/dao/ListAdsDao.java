@@ -1,8 +1,16 @@
+package dao;
+
+import models.Ad;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdsDao implements Ads {
+
     private List<Ad> ads;
+    private models.Ad ad;
+
+
 
     public List<Ad> all() {
         if (ads == null) {
@@ -38,5 +46,10 @@ public class ListAdsDao implements Ads {
             "Must have strong Java skills"
         ));
         return ads;
+    }
+
+    @Override
+    public void create(Ad ad) {
+        this.ads.add(ad);
     }
 }

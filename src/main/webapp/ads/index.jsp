@@ -4,7 +4,7 @@
 
 <head>
     <jsp:include page="../partials/head.jsp">
-        <jsp:param name="title" value="All Ads"/>
+        <jsp:param name="title" value="All dao.Ads"/>
     </jsp:include>
 
 </head>
@@ -13,7 +13,7 @@
 <jsp:include page="../partials/navbar.jsp"/>
 
 <div class="container">
-    <h1>All Ads:</h1>
+    <h1>All dao.Ads:</h1>
     <c:forEach items="${ads}" var="ad">
         <div class="card">
             <div class="card-body">
