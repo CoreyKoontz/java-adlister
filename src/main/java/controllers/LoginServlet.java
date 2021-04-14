@@ -11,8 +11,12 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/login.jsp").forward(req, resp);
 
+        if (req.getSession().getAttribute("user") != null) {
+            resp.sendRedirect("/profile");
+            return;
+        }
+        req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -20,7 +24,9 @@ public class LoginServlet extends HttpServlet {
         if (req.getMethod().equalsIgnoreCase("post")) {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
-            if (username.equals("admin") && password.equals("password")) {
+
+            if (username.equals("user") && password.equals("password")) {
+                req.getSession().setAttribute("user", true);
                 resp.sendRedirect("/profile");
             } else {
                 resp.sendRedirect("/login");
