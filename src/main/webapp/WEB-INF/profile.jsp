@@ -12,7 +12,7 @@
 
     <div class="container">
         <h1>Viewing your profile.</h1>
-        <h3>${name}</h3>
+        <h3>Hello, ${name}!</h3>
     </div>
 
 </body>
