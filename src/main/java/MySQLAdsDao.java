@@ -14,9 +14,9 @@ public class MySQLAdsDao implements Ads {
         try {//<------------------------------------------------------ Must be wrapped in a try/catch block ---------
             DriverManager.registerDriver(new Driver());//<------------ Instantiating DB Driver.                      |
             Connection connection = DriverManager.getConnection(//<--- Only create connection once.                  |
-                    Config.getUrl(),//------------------------------\                                                |
-                    Config.getUsername(),//--------------------------> Pulling in config values from Config.java     |
-                    Config.getPassword()//--------------------------/  in order to protect these values.             |                                  |
+                    config.getUrl(),//------------------------------\                                                |
+                    config.getUsername(),//--------------------------> Pulling in config values from Config.java     |
+                    config.getPassword()//--------------------------/  in order to protect these values.             |                                  |
             );//                                                                                                     |
         } catch (SQLException e) {//<--------------------------------------------------------------------------------
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class MySQLAdsDao implements Ads {
             String description = ad.getDescription();
 
             String query = "INSERT INTO ads(user_id, title, description) " +
-            "VALUES (" + userId + ", " + title + ", " +  description + ")";
+            "VALUES ('" + userId + "', '" + title + "', '" +  description + "')";
 
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
