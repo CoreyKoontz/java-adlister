@@ -17,26 +17,29 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
         }
     }
 
+    // TODO-------------------------------------------------- Refactor to use prepared statements:
     @Override
     public List<Ad> all() {
-        Statement stmt = null;
+        PreparedStatement ps = null;
         try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
+            String sql = "SELECT * FROM ads";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
+
 
     @Override
     public Long insert(Ad ad) {
@@ -51,19 +54,37 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    // TODO-------------------------------------------------- Refactor to use prepared statements:
     private String createInsertQuery(Ad ad) {
-        return "INSERT INTO ads(user_id, title, description) VALUES "
-            + "(" + ad.getUserId() + ", "
-            + "'" + ad.getTitle() +"', "
-            + "'" + ad.getDescription() + "')";
+
+        String sql = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+        PreparedStatement ps = null;
+        String idAdded = null;
+
+        try {
+            ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, ad.getUserId());
+            ps.setString(2, ad.getTitle());
+            ps.setString(3, ad.getDescription());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+
+            idAdded = rs.getString(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idAdded;
     }
 
+    // TODO-------------------------------------------------- Refactor to use prepared statements:
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description")
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description")
         );
     }
 
