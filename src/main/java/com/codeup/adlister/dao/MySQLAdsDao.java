@@ -78,7 +78,6 @@ public class MySQLAdsDao implements Ads {
         return idAdded;
     }
 
-    // TODO-------------------------------------------------- Refactor to use prepared statements:
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
                 rs.getLong("id"),
