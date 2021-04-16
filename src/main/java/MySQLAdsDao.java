@@ -45,8 +45,34 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
+    // TODO-------------------------------------------------- Insert ad method:
     @Override
     public Long insert(Ad ad) {
-        String query = "INSERT INTO ads(user_id, title, description)";
+
+        long newId = 0;
+
+        try {
+            long userId = ad.getUserId();
+            String title = ad.getTitle();
+            String description = ad.getDescription();
+
+            String query = "INSERT INTO ads(user_id, title, description) " +
+            "VALUES (" + userId + ", " + title + ", " +  description + ")";
+
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                System.out.println("Inserted a new record! New id: " + rs.getLong(1));
+                newId = rs.getLong(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
     }
+
+
 }
