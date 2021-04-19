@@ -13,13 +13,13 @@ import java.util.List;
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
 
-    public MySQLAdsDao(Config config) {
+    public MySQLAdsDao() {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUser(),
-                    config.getPassword()
+                    Config.getUrl(),
+                    Config.getUsername(),
+                    Config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -43,25 +43,11 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
-        try {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            return rs.getLong(1);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error creating a new ad.", e);
-        }
-    }
 
-    // TODO-------------------------------------------------- Refactor to use prepared statements:
-    private String createInsertQuery(Ad ad) {
-
-        String sql = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
-        PreparedStatement ps = null;
-        String idAdded = null;
 
         try {
+            String sql = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            PreparedStatement ps = null;
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, ad.getUserId());
             ps.setString(2, ad.getTitle());
@@ -69,14 +55,36 @@ public class MySQLAdsDao implements Ads {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
+            return rs.getLong(1);
 
-            idAdded = rs.getString(1);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error creating ad!", e);
+
         }
-        return idAdded;
     }
+    // TODO-------------------------------------------------- Refactor to use prepared statements:
+//    private String createInsertQuery(Ad ad) {
+//
+//        String sql = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+//        PreparedStatement ps = null;
+//
+//        try {
+//            ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.setLong(1, ad.getUserId());
+//            ps.setString(2, ad.getTitle());
+//            ps.setString(3, ad.getDescription());
+//            ps.executeUpdate();
+//            ResultSet rs = ps.getGeneratedKeys();
+//            rs.next();
+//            return rs.getLong(1);
+//
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
     private Ad extractAd(ResultSet rs) throws SQLException {

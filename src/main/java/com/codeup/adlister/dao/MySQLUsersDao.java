@@ -7,16 +7,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
+
 public class MySQLUsersDao implements Users{
     private Connection conn;
 
-    public MySQLUsersDao (Config config){
+    public MySQLUsersDao (){
+
         try {
             DriverManager.registerDriver(new Driver());
             conn = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUsername(),
-                    config.getPassword()
+                    Config.getUrl(),
+                    Config.getUsername(),
+                    Config.getPassword()
             );
         } catch (SQLException e) {
             e.printStackTrace();
